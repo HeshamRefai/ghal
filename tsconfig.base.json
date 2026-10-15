@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "paths": {
+      "@ghal/domain": ["./domain/src"],
+      "@ghal/process-ir": ["./modules/process-ir/src"],
+      "@ghal/runtime": ["./modules/runtime/src"],
+      "@ghal/governance": ["./modules/governance/src"],
+      "@ghal/model-gateway": ["./modules/model-gateway/src"],
+      "@ghal/audit": ["./modules/audit/src"],
+      "@ghal/protocols": ["./modules/protocols/src"]
+    }
+  }
+}
