@@ -3,7 +3,7 @@
   "process_id": "00000000-0000-0000-0000-000000000001",
   "version": 1,
   "outcome": {
-    "statement": "دفع فواتير الموردين في موعدها بأقل تدخل بشري وأعلى دقة",
+    "statement": "Pay supplier invoices on time with minimal human intervention and maximum accuracy",
     "kpis": [
       { "name": "cycle_time_hours", "target": 24, "unit": "h" },
       { "name": "exception_rate", "target": 5, "unit": "%" },
@@ -12,10 +12,10 @@
   },
   "modules": [
     {
-      "id": "m-intake", "name": "الاستلام والتقاط", "order": 1,
+      "id": "m-intake", "name": "Intake & Capture", "order": 1,
       "steps": [
         {
-          "id": "s-receive", "type": "step", "name": "استلام الفاتورة من البريد",
+          "id": "s-receive", "type": "step", "name": "Receive Invoice from Email",
           "actor": { "type": "system", "ref": "email-gateway" },
           "autonomy": "ALLOW", "inputs": [], "outputs": ["invoice_raw"],
           "evidence_required": ["email_original"], "parameters": {},
@@ -23,7 +23,7 @@
           "exceptions": [{ "on": "parse_failure", "route": "human" }]
         },
         {
-          "id": "s-extract", "type": "step", "name": "استخراج البيانات والتحقق منها",
+          "id": "s-extract", "type": "step", "name": "Extract & Validate Invoice Data",
           "actor": { "type": "agent", "ref": "invoice-extraction-agent" },
           "autonomy": "SUPERVISED", "inputs": ["invoice_raw"], "outputs": ["invoice_structured"],
           "evidence_required": ["extraction_confidence"],
@@ -38,10 +38,10 @@
       ]
     },
     {
-      "id": "m-validate", "name": "التحقق المطابقة", "order": 2,
+      "id": "m-validate", "name": "Validation & Matching", "order": 2,
       "steps": [
         {
-          "id": "s-po-match", "type": "decision", "name": "مطابقة الفاتورة مع أمر الشراء",
+          "id": "s-po-match", "type": "decision", "name": "Match Invoice with Purchase Order",
           "actor": { "type": "agent", "ref": "matching-agent" },
           "autonomy": "SUPERVISED", "inputs": ["invoice_structured"], "outputs": ["match_result"],
           "evidence_required": ["po_reference"],
@@ -53,10 +53,10 @@
       "transitions": [{ "from": "s-extract", "to": "s-po-match" }]
     },
     {
-      "id": "m-approve", "name": "الاعتماد", "order": 3,
+      "id": "m-approve", "name": "Approval", "order": 3,
       "steps": [
         {
-          "id": "s-approve", "type": "approval", "name": "اعتماد الدفع",
+          "id": "s-approve", "type": "approval", "name": "Approve Payment",
           "actor": { "type": "human", "ref": "finance_manager" },
           "autonomy": "APPROVAL_REQUIRED", "inputs": ["match_result", "invoice_structured"], "outputs": ["approval"],
           "evidence_required": ["match_result", "invoice_structured"],
@@ -68,10 +68,10 @@
       "transitions": [{ "from": "s-po-match", "to": "s-approve", "condition_param": "amount_gte_threshold" }]
     },
     {
-      "id": "m-pay", "name": "التنفيذ", "order": 4,
+      "id": "m-pay", "name": "Execution", "order": 4,
       "steps": [
         {
-          "id": "s-pay", "type": "step", "name": "تنفيذ الدفع عبر ERP",
+          "id": "s-pay", "type": "step", "name": "Execute Payment via ERP",
           "actor": { "type": "system", "ref": "erp-gateway" },
           "autonomy": "ALLOW", "inputs": ["approval"], "outputs": ["payment_confirmation"],
           "evidence_required": ["payment_reference"], "parameters": {},
