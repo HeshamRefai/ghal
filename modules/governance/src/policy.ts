@@ -1,6 +1,6 @@
 /**
  * Governance — Policy-as-Code engine (I53) + P2 Authorization
- * القاعدة المطلقة: Deny by default.
+ * Absolute rule: Deny by default.
  */
 export type Decision = 'GRANT' | 'DENY' | 'REQUIRE_APPROVAL';
 
