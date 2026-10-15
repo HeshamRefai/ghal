@@ -1,26 +1,26 @@
 # G-HAL Implementation Backlog — Phases → Tasks
 
-كل Task يُقبل فقط بمعيار Done: كود + اختبار + API + نموذج بيانات + تحقق + تفويض + تدقيق + معالجة أخطاء + توثيق.
+Every task is accepted only with Done criteria: code + test + API + data model + validation + delegation + audit + error handling + documentation.
 
 ## Phase 0 — Foundation
-| Task | الوصف | القبول |
-|------|-------|--------|
-| T0.1 | Monorepo + TS strict + lint | `pnpm build/test` أخضر |
-| T0.2 | Supabase + 0001 + 0002 | عزل Tenantين |
-| T0.3 | Auth + RBAC | كل طلب يحمل tenant+role |
-| T0.4 | AuditWriter + Hash chaining | تعديل سجل قديم يكسر التحقق |
-| T0.5 | CI/CD | PR بلا governance tests = مرفوض |
+| Task | Description | Acceptance |
+|------|-------------|------------|
+| T0.1 | Monorepo + TS strict + lint | `pnpm build/test` green |
+| T0.2 | Supabase + 0001 + 0002 | Two-tenant isolation |
+| T0.3 | Auth + RBAC | Every request carries tenant+role |
+| T0.4 | AuditWriter + Hash chaining | Modifying old record breaks verification |
+| T0.5 | CI/CD | PR without governance tests = rejected |
 
 ## Phase 1 — Process Core
-| Task | الوصف | القبول |
-|------|-------|--------|
-| T1.1 | CRUD Process/Version/Module/Step | IR المصدر الوحيد |
-| T1.2 | validateIR + tests | IR invalid = 422 |
-| T1.3 | P1–P10 state machines | انتقال غير قانوني = خطأ |
-| T1.4 | Runtime engine | P2 قبل التنفيذ؛ P4 بعده |
-| T1.5 | Approval workflow | رفض = Attention route |
-| T1.6 | Runtime compiler | استئناف من آخر Event |
-| T1.7 | Seed Invoice + Case | start→end كامل |
+| Task | Description | Acceptance |
+|------|-------------|------------|
+| T1.1 | CRUD Process/Version/Module/Step | IR is the single source of truth |
+| T1.2 | validateIR + tests | Invalid IR = 422 |
+| T1.3 | P1–P10 state machines | Illegal transition = error |
+| T1.4 | Runtime engine | P2 before execution; P4 after |
+| T1.5 | Approval workflow | Rejection = Attention route |
+| T1.6 | Runtime compiler | Resume from last Event |
+| T1.7 | Seed Invoice + Case | Full start→end |
 
 ## Phase 2 — Intelligence (S4–S6)
 T2.1 Genome builder · T2.2 Query interface · T2.3 Friction Taxonomy · T2.4 Bottleneck · T2.5 RCA · T2.6 Anomaly · T2.7 Health/Debt · T2.8 Discovery Agent
