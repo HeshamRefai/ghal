@@ -1,6 +1,6 @@
 /**
- * Process IR — التمثيل الوسيط
- * خصائص: Versioned, Validatable, Simulatable, Governable, Executable, Auditable, Evolvable.
+ * Process IR — Intermediate Representation
+ * Properties: Versioned, Validatable, Simulatable, Governable, Executable, Auditable, Evolvable.
  */
 export const IR_VERSION = '1.0' as const;
 
