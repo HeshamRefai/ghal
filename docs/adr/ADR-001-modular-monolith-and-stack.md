@@ -1,15 +1,15 @@
 # ADR-001: Modular Monolith + Stack
 
-**الحالة:** مقبول (Phase 0)
+**Status:** Accepted (Phase 0)
 
-## القرار
-Monorepo واحد (pnpm workspaces): Next.js للواجهة، REST API داخل نفس المنظومة، PostgreSQL عبر Supabase، استضافة Cloudflare، TypeScript صارم.
+## Decision
+Single monorepo (pnpm workspaces): Next.js for frontend, REST API in the same system, PostgreSQL via Supabase, Cloudflare hosting, strict TypeScript.
 
-## البدائل المرفوضة
-- Microservices: 7 محركات تتشارك النموذج والمعاملات؛ التوزيع الآن = حالة موزعة بلا فائدة
-- Kubernetes: لا حاجة تشغيلية؛ Cloudflare + Supabase يكفيان للمVP
-- Vector DB: لا مشكلة بحث دلالي بعد في MVP؛ JSONB يكفي
-- Python Backend: النمذجة الإحصائية لاحقًا يمكن عبر worker؛ أغلب النظام Workflow/State منطق TS
+## Rejected Alternatives
+- **Microservices:** 7 engines share models and transactions; distribution now = distributed state with no benefit
+- **Kubernetes:** No operational need; Cloudflare + Supabase is sufficient for MVP
+- **Vector DB:** No semantic search requirement yet in MVP; JSONB is sufficient
+- **Python Backend:** Statistical modeling can be done later via worker; most of the system is Workflow/State logic in TS
 
-## الأثر المستقبلي
-كل module قابل للاستخراج كخدمة مستقلة عندما تثبت الحاجة.
+## Future Impact
+Every module is extractable as an independent service when the need is proven.
