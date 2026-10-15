@@ -21,7 +21,7 @@ await upsert('user_roles', { tenant_id: ORG, user_id: USER, role_id: '33333333-3
 await upsert('actors', {
   id: '44444444-4444-4444-4444-444444444444', tenant_id: ORG, type: 'agent',
   ref: JSON.stringify({
-    agent_id: 'invoice-extraction-agent', purpose: 'استخراج بيانات الفاتورة',
+    agent_id: 'invoice-extraction-agent', purpose: 'Extract invoice data from raw documents',
     input_schema: { type: 'object' }, output_schema: { type: 'object' },
     allowed_tools: ['extract_invoice_fields'], allowed_systems: ['email-gateway'],
     permission_scope: 'read-only', risk_level: 'med', confidence_requirement: 0.8,
@@ -42,7 +42,7 @@ await upsert('policies', {
 }, 'id');
 
 await upsert('parameters', { tenant_id: ORG, key: 'approval_threshold', value: 10000, version: 1 }, 'tenant_id,key');
-await upsert('processes', { id: ir.process_id, tenant_id: ORG, name: 'Invoice Processing', description: 'دورة فواتير الموردين — Pilot', created_by: USER, status: 'active' }, 'id');
+await upsert('processes', { id: ir.process_id, tenant_id: ORG, name: 'Invoice Processing', description: 'Supplier invoice workflow — Pilot', created_by: USER, status: 'active' }, 'id');
 await upsert('process_versions', {
   id: '66666666-6666-6666-6666-666666666666', tenant_id: ORG,
   process_id: ir.process_id, version: 1, status: 'active', ir, change_reason: 'pilot baseline',
