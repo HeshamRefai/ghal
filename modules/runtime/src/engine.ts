@@ -1,6 +1,6 @@
 /**
  * Process Execution Runtime
- * ينفّذ Process IR خطوة بخطوة، يثبّت Case على إصدارها، ويكتب Events.
+ * Executes Process IR step by step, pins Case to its version, writes Events.
  */
 import type { ProcessIR, IRStep, AutonomyLevel } from '@ghal/process-ir';
 
