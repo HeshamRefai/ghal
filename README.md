@@ -12,6 +12,7 @@
 | Database | https://glzrohbiswtokurwuwxx.supabase.co |
 | Architecture Deliverable | [G-HAL-Complete-Deliverable.pdf](docs/G-HAL-Complete-Deliverable.pdf) |
 | Execution Plan | [G-HAL-Master-Execution-Plan.md](docs/G-HAL-Master-Execution-Plan.md) |
+| Gap Analysis | [docs/gap-analysis.md](docs/gap-analysis.md) |
 
 ## Non-Negotiable Principles
 
@@ -31,7 +32,7 @@ domain/       Unified domain model
 infrastructure/
   database/   migrations 0001_core + 0002_security (Supabase/Postgres)
 tests/        Golden Dataset + mandatory governance tests
-docs/         ADRs + Backlog + Architecture Reports
+docs/         ADRs + Backlog + Architecture Reports + Gap Analysis
 ```
 
 ## Lifecycle
@@ -87,6 +88,20 @@ pnpm test           # unit + integration + governance
 | Protocol Tests | P2, P4, P5, P7 transitions — illegal transitions throw |
 | Runtime Tests | Authorization before execution, Autonomy boundary |
 
+## Coverage & Gaps
+
+The execution plan covers ~70–80% of the source vision as executable tasks. A systematic gap analysis identified 5 modules that need explicit addition:
+
+| Module | Phase | Purpose |
+|--------|-------|---------|
+| Outcome & Commercial Validation | Pre-Phase 0 | Buyer, Owner, Problem, Value, Data Access, Pilot Authorization |
+| Data Readiness | Phase 0/1 | Event schema, Case ID mapping, Quality gates, Baseline |
+| A.G.E.N.T. Operating Framework | Phase 1 | Unified methodology artifact per letter (Audit→Gauge→Engineer→Navigate→Track) |
+| Process Harness | Phase 1/2 | Explicit unified component: context, agent invocation, policy, approval, evidence, exception, drift |
+| Human Adoption & Dynamic Work Design | Phase 3/7 | Adoption metrics, training, transition, WIP management, flow balancing |
+
+See [docs/gap-analysis.md](docs/gap-analysis.md) for full audit.
+
 ## Remaining (Phases 2–7)
 
 - Phase 2: Intelligence engines (Genome, Friction, Bottleneck, Anomaly)
@@ -102,3 +117,4 @@ pnpm test           # unit + integration + governance
 - `docs/execution-plan/` — Complete execution plan
 - `docs/adr/` — Architectural decisions (ADR-001, ADR-002)
 - `docs/backlog/` — Phase → Task breakdown
+- `docs/gap-analysis.md` — Systematic audit of source ideas vs. execution plan
