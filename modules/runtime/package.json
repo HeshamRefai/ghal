@@ -1,0 +1,1 @@
+{ "name": "@ghal/runtime", "version": "0.1.0", "private": true, "type": "module", "main": "src/engine.ts", "dependencies": { "@ghal/process-ir": "workspace:*", "@ghal/protocols": "workspace:*", "@ghal/governance": "workspace:*" } }
