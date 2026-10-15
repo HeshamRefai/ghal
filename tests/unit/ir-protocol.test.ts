@@ -1,5 +1,5 @@
 /**
- * اختبارات Process IR + Protocols
+ * Process IR + Protocol tests
  */
 import { describe, it, expect } from 'vitest';
 import { validateIR, IR_VERSION, type ProcessIR } from '@ghal/process-ir';

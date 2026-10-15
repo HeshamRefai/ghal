@@ -1,5 +1,5 @@
 /**
- * اختبارات Runtime — تنفيذ محكوم
+ * Runtime tests — governed execution
  */
 import { describe, it, expect, vi } from 'vitest';
 import { runStep, resolveAutonomy, type RuntimeDeps, type ExecutionContext } from '@ghal/runtime';

@@ -1,5 +1,5 @@
 /**
- * اختبارات الحوكمة الإلزامية — أي build يفشل هنا مرفوض.
+ * Mandatory governance tests — any build that fails here is rejected.
  */
 import { describe, it, expect } from 'vitest';
 import { evaluate, authorizeTool, type Policy, type AgentContract } from '@ghal/governance';
