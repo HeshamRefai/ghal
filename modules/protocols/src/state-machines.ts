@@ -1,6 +1,6 @@
 /**
  * Protocols P1–P10
- * كل بروتوكول آلة حالات تُسجَّل انتقالاتها في AuditEvent.
+ * Each protocol is a state machine; transitions are logged in AuditEvent.
  */
 export interface ProtocolStateMachine<S extends string, E extends string> {
   id: string; initial: S; states: readonly S[];
