@@ -15,7 +15,8 @@
     "test": "vitest run",
     "lint": "pnpm -r lint",
     "db:push": "supabase db push",
-    "db:reset": "supabase db reset"
+    "db:reset": "supabase db reset",
+    "typecheck": "tsc -p tsconfig.json"
   },
   "devDependencies": {
     "typescript": "^5.5.0",

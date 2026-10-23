@@ -8,3 +8,5 @@ dist/
 .vscode/
 coverage/
 .turbo/
+.gal-data/
+.gal-data/
