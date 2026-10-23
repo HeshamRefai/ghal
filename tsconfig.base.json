@@ -12,13 +12,42 @@
     "declarationMap": true,
     "sourceMap": true,
     "paths": {
-      "@ghal/domain": ["./domain/src"],
-      "@ghal/process-ir": ["./modules/process-ir/src"],
-      "@ghal/runtime": ["./modules/runtime/src"],
-      "@ghal/governance": ["./modules/governance/src"],
-      "@ghal/model-gateway": ["./modules/model-gateway/src"],
-      "@ghal/audit": ["./modules/audit/src"],
-      "@ghal/protocols": ["./modules/protocols/src"]
+      "@ghal/domain": [
+        "./domain/src"
+      ],
+      "@ghal/process-ir": [
+        "./modules/process-ir/src/types.ts"
+      ],
+      "@ghal/runtime": [
+        "./modules/runtime/src/engine.ts"
+      ],
+      "@ghal/governance": [
+        "./modules/governance/src/policy.ts"
+      ],
+      "@ghal/model-gateway": [
+        "./modules/model-gateway/src"
+      ],
+      "@ghal/audit": [
+        "./modules/audit/src"
+      ],
+      "@ghal/protocols": [
+        "./modules/protocols/src/state-machines.ts"
+      ],
+      "@ghal/ingestion": [
+        "./modules/ingestion/src"
+      ],
+      "@ghal/metrics": [
+        "./modules/metrics/src"
+      ],
+      "@ghal/diagnostics": [
+        "./modules/diagnostics/src"
+      ],
+      "@ghal/redesign": [
+        "./modules/redesign/src"
+      ],
+      "@ghal/outcomes": [
+        "./modules/outcomes/src"
+      ]
     }
   }
 }

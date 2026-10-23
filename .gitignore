@@ -8,3 +8,4 @@ dist/
 .vscode/
 coverage/
 .turbo/
+.ghal-data/

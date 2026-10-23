@@ -29,7 +29,7 @@ const auditStore = {
 };
 const audit = new AuditWriter(auditStore);
 
-const app = new Hono();
+const app = new Hono<{ Variables: { tenant: string; user: string } }>();
 
 app.use('*', async (c, next) => {
   const tenant = c.req.header('x-tenant-id');
@@ -65,7 +65,10 @@ app.post('/processes', async (c) => {
 });
 
 app.get('/processes', async (c) => {
-  const { data, error } = await supabase.from('processes').select('*, process_versions(id, version, status)');
+  // Tenant filter is mandatory: the service-role key bypasses RLS, so
+  // organization isolation is enforced explicitly in every query.
+  const { data, error } = await supabase.from('processes').select('*, process_versions(id, version, status)')
+    .eq('tenant_id', c.get('tenant'));
   if (error) return c.json({ error: error.message }, 400);
   return c.json(data);
 });
@@ -88,7 +91,7 @@ app.post('/processes/:id/versions', async (c) => {
 
 app.get('/processes/:id/versions', async (c) => {
   const { data, error } = await supabase.from('process_versions')
-    .select('id, version, status, change_reason, created_at').eq('process_id', c.req.param('id')).order('version');
+    .select('id, version, status, change_reason, created_at').eq('tenant_id', c.get('tenant')).eq('process_id', c.req.param('id')).order('version');
   if (error) return c.json({ error: error.message }, 400);
   return c.json(data);
 });
@@ -106,7 +109,7 @@ app.post('/cases', async (c) => {
 
 app.get('/cases/:id', async (c) => {
   const { data, error } = await supabase.from('cases')
-    .select('*, events(*)').eq('id', c.req.param('id')).single();
+    .select('*, events(*)').eq('tenant_id', c.get('tenant')).eq('id', c.req.param('id')).single();
   if (error) return c.json({ error: error.message }, 404);
   return c.json(data);
 });
@@ -147,6 +150,7 @@ app.post('/exceptions', async (c) => {
 
 app.get('/exceptions', async (c) => {
   const { data, error } = await supabase.from('exceptions').select('*')
+    .eq('tenant_id', c.get('tenant'))
     .order('created_at', { ascending: false }).limit(100);
   if (error) return c.json({ error: error.message }, 400);
   return c.json(data);
@@ -154,11 +158,17 @@ app.get('/exceptions', async (c) => {
 
 app.get('/audit-events', async (c) => {
   const { data, error } = await supabase.from('audit_events').select('*')
+    .eq('tenant_id', c.get('tenant'))
     .order('seq', { ascending: false }).limit(200);
   if (error) return c.json({ error: error.message }, 400);
   return c.json(data);
 });
 
-const port = Number(process.env.PORT ?? 8787);
-serve({ fetch: app.fetch, port });
-console.log(`G-HAL API on :${port}`);
+// Only start listening when run directly (importable for tests/dev composition).
+if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
+  const port = Number(process.env.PORT ?? 8787);
+  serve({ fetch: app.fetch, port });
+  console.log(`G-HAL API on :${port}`);
+}
+
+export default app;

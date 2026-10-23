@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch src/dev-server.ts",
     "start": "tsx src/index.ts",
-    "seed": "tsx src/seed/run.ts"
+    "seed": "tsx src/seed/run.ts",
+    "dev:supabase": "tsx watch src/index.ts"
   },
   "dependencies": {
     "hono": "^4.5.0",
@@ -17,7 +18,14 @@
     "@ghal/governance": "workspace:*",
     "@ghal/process-ir": "workspace:*",
     "@ghal/protocols": "workspace:*",
-    "@ghal/runtime": "workspace:*"
+    "@ghal/runtime": "workspace:*",
+    "@ghal/ingestion": "workspace:*",
+    "@ghal/metrics": "workspace:*",
+    "@ghal/diagnostics": "workspace:*",
+    "@ghal/redesign": "workspace:*",
+    "@ghal/outcomes": "workspace:*"
   },
-  "devDependencies": { "tsx": "^4.19.0" }
+  "devDependencies": {
+    "tsx": "^4.19.0"
+  }
 }
